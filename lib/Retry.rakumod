@@ -1,4 +1,4 @@
-unit module Retry:ver<0.0.1>:auth<github:hythm7>;
+unit module Retry:ver<0.0.2>:auth<github:hythm7>;
 
 sub retry ( &action, Int:D :$max is copy = 4, Real:D :$delay is copy = 0.2 ) is export {
 
