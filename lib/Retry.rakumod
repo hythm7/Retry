@@ -1,6 +1,6 @@
 unit module Retry:ver<0.0.1>:auth<github:hythm7>;
 
-sub retry ( &action, :$max is copy = 4, :$delay is copy = 0.2 ) is export {
+sub retry ( &action, Int:D :$max is copy = 4, Real:D :$delay is copy = 0.2 ) is export {
 
   loop {
 
@@ -8,8 +8,7 @@ sub retry ( &action, :$max is copy = 4, :$delay is copy = 0.2 ) is export {
 
     return $result unless $!;
 
-    # TODO: when -∞ ≤ $max ≤ 0
-    $!.rethrow unless $max;
+    $!.rethrow if $max == 0;
 
     sleep $delay;
 
