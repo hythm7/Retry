@@ -1,6 +1,10 @@
 unit module Retry:ver<0.0.2>:auth<github:hythm7>;
 
-multi sub retry ( &action, Int:D :$max is copy = 4, Real:D :$delay is copy = 0.2 ) is export {
+subset InfInt where Int:D|Inf|Whatever;
+
+multi sub retry ( &action, InfInt :$max is copy = 4, Real:D :$delay is copy = 0.2 ) is export {
+
+  $max = Inf if $max ~~ Whatever;
 
   loop {
 
@@ -19,7 +23,9 @@ multi sub retry ( &action, Int:D :$max is copy = 4, Real:D :$delay is copy = 0.2
 
 }
 
-multi sub retry ( &action, Int:D :$max is copy = 4, :&delay ) is export {
+multi sub retry ( &action, InfInt :$max is copy = 4, :&delay ) is export {
+
+  $max = Inf if $max ~~ Whatever;
 
   loop {
 
