@@ -2,23 +2,45 @@ use Test;
 use Retry;
 
 
-plan 2;
+plan 4;
 
-my $i = 0;
+sub eventually-lives {
 
-lives-ok { retry( {
+  sub {
+    die unless $++ > 0;
 
-  loop {
-
-        last if $i == 1;
-        $i += 1;
-        die;
+    True
   }
 
-  $i;
+}
 
-} ) }, 'retry success in second attempt';
+sub always-dies {
 
-dies-ok { retry( { die }, :1max ) }, 'dies when always fail';
+    sub {
+        die;
+    }
+
+}
+
+
+lives-ok {
+
+  retry eventually-lives
+
+}, 'retry success in second attempt';
+
+
+dies-ok { retry( always-dies, :1max ) }, 'dies when always fail';
+
+
+lives-ok {
+    retry eventually-lives, :delay({ (1/10..3/10).pick });
+}, 'retry delayed by Code';
+
+
+dies-ok {
+    retry always-dies, :delay({ 0 });
+}, 'retry delayed by Code';
+
 
 done-testing;

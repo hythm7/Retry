@@ -10,6 +10,9 @@ SYNOPSIS
 use Retry;
 
 retry { action }, :4max, :2delay;
+
+retry { say 'trying!'; die }, :max(-1), :delay({ constant @fib = 0, 1, *+* ... *; @fib[$++] });
+
 ```
 
 DESCRIPTION
@@ -19,7 +22,7 @@ Retry is a module that exports `retry` sub which takes a `Block` to retry execut
 
 `max` defaults to `4`. sets the max number of retries. `-∞ ≤ max < 0` to retry forever.
 
-`delay` defaults to `0.2`. sets the delay between retries. delay doubles with every retry.
+`delay` defaults to `0.2`. sets the delay between retries. The delay doubles with every retry. Use a `Code` object to provide your own stepping. Each call must return a `Real`.
 
 AUTHOR
 ======
