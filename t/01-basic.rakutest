@@ -2,7 +2,7 @@ use Test;
 use Retry;
 
 
-plan 4;
+plan 6;
 
 sub eventually-lives {
 
@@ -42,5 +42,12 @@ dies-ok {
     retry always-dies, :delay({ 0 });
 }, 'retry delayed by Code';
 
+lives-ok {
+    retry eventually-lives, :max(Inf);
+}, ‚we can retry for ∞‘;
+
+lives-ok {
+    retry eventually-lives, :max(*);
+}, ‚we can retry for *‘;
 
 done-testing;
