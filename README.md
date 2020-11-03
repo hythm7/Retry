@@ -26,7 +26,7 @@ Retry is a module that exports `retry` sub which takes a `Block` to retry execut
 
 Acknowledgements
 ================
-Thanks to gfldex for improving the module by allowing passing `Callable` to `delay`, also allow using `Inf` and `Whatever`.
+Thanks to gfldex for improving the module by allowing passing `Callable` to `delay`, also allow using `Inf` and `Whatever`. and improving tests as well.
 
 Author
 ======

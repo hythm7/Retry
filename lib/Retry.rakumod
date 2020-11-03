@@ -1,4 +1,4 @@
-unit module Retry:ver<0.0.3>:auth<github:hythm7>;
+unit module Retry:ver<0.0.4>:auth<github:hythm7>;
 
 subset InfInt where Int:D|Inf|Whatever;
 
