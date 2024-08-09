@@ -25,6 +25,6 @@ jobs:
       - name: Clone Pakku
         run: git clone https://github.com/hythm7/Pakku.git /tmp/Pakku
       - name: Install Pakku
-        run: raku -I/tmp/Pakku ./tmp/Pakku/bin/pakku nobar nospinner verbose all add /tmp/Pakku
+        run: raku -I/tmp/Pakku /tmp/Pakku/bin/pakku nobar nospinner verbose all add /tmp/Pakku
       - name: Install Module
         run: pakku nobar nospinner verbose all add .
