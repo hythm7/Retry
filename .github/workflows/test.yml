@@ -18,13 +18,13 @@ jobs:
           - 'latest'
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: Raku/setup-raku@v1
         with:
           raku-version: ${{ matrix.raku-version }}
       - name: Clone Pakku
         run: git clone https://github.com/hythm7/Pakku.git /tmp/Pakku
       - name: Install Pakku
-        run: /tmp/Pakku/tools/install-pakku.raku --dest=/tmp/pakku
+        run: raku -I/tmp/Pakku ./tmp/Pakku/bin/pakku nobar nospinner verbose all add /tmp/Pakku
       - name: Install Module
-        run: /tmp/pakku/bin/pakku verbose trace add .
+        run: pakku nobar nospinner verbose all add .
